@@ -37,6 +37,20 @@ The mission nodes run on perception models I trained:
 
 Images came from the rover's own camera in the final-project scene, collected at different distances, angles and occlusion levels, including empty frames as hard negatives. Each detection is paired with the depth at its centre, which is what `get_bear` backprojects into the map frame.
 
+### Dataset choices behind the models
+
+The HW4 report documents two different priorities: a smaller **YOLO11s detector at 640 px** for inference speed, and a larger **YOLO11m-seg model at 800 px** for boundary detail. These were design choices; the report does not include a comparative latency or model-size ablation.
+
+Segmentation used more conservative augmentation: rotation ±3° rather than ±10°, translation 0.05 rather than 0.1, scale 0.25 rather than 0.5, mosaic 0.2 rather than 1.0, and no horizontal flipping. This preserved more of the scene geometry while still introducing variation.
+
+| Small targets | Partial target | No target |
+|---|---|---|
+| ![Small-target annotation example](docs/media/perception-small-targets.png) | ![Partial-target annotation example](docs/media/perception-partial-target.png) | ![Negative frame from the dataset report](docs/media/perception-negative-frame.png) |
+
+These are **dataset / annotation examples** extracted from the HW4 report (pp. 5–6), showing the cases deliberately included during data collection. They are distinct from the inference demonstration above.
+
+The held-out tests contain 20 detection images and 19 segmentation images. The reported metrics describe those course-scene splits; they do not measure generalization to new environments or end-to-end mission success. The segmentation report also records test mask mAP50–95 of **0.6751**. The separate `ramp` model listed above has no recorded test metric in that report.
+
 ## System overview
 
 ```mermaid
