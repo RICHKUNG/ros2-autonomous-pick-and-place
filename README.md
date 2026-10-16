@@ -51,6 +51,8 @@ These are **dataset / annotation examples** extracted from the HW4 report (pp. 5
 
 The held-out tests contain 20 detection images and 19 segmentation images. The reported metrics describe those course-scene splits; they do not measure generalization to new environments or end-to-end mission success. The segmentation report also records test mask mAP50–95 of **0.6751**. The separate `ramp` model listed above has no recorded test metric in that report.
 
+Full dataset splits, augmentation settings and validation/test metrics: [perception training record](docs/perception-training.md).
+
 ## System overview
 
 ```mermaid
@@ -161,3 +163,4 @@ Map-building helpers: `build_map` (records the origin into `goals.yaml`) and `re
 ## License
 
 MIT, as declared in [`package.xml`](rne_final_pkg/package.xml). See [LICENSE](LICENSE).
+
